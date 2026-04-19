@@ -57,7 +57,7 @@ const APPS = {
 
 // ─── BOOT ──────────────────────────────────────────────────
 const BOOT_MSGS = [
-  'Initializing kernel...','Loading system modules...','Mounting file system...',
+  'Initializing kernel...','Loading poyi oombada...','Mounting file system...',
   'Starting window manager...','Applying user preferences...','Ready.'
 ];
 function boot() {
@@ -73,7 +73,7 @@ function boot() {
         startClock();
         buildStartMenu();
         S.pin = localStorage.getItem(KEYS.PIN) || '1234';
-        showNotification('Welcome','MonOpSy v3 is ready','fa-check-circle');
+        showNotification('Welcome','MonOpSy is ready','fa-check-circle');
       }, 400);
       return;
     }
@@ -195,9 +195,9 @@ function openAbout() {
       </div>
       <div style="font-family:var(--font-ui);font-weight:800;font-size:1.6rem">MonOpSy</div>
       <div class="about-version">Version 3.0.0</div>
-      <div class="about-desc">A minimalist web-based operating system. Built with vanilla HTML, CSS, and JavaScript. Open-source under the MIT license.</div>
-      <div style="font-size:.85rem">Made by <a href="https://github.com/Muhammednajah/MonOpSy" class="about-link" target="_blank">NajahCreates</a></div>
-      <div style="font-size:.75rem;color:var(--text3);font-family:var(--font-mono)">@najah.creates · github.com/Muhammednajah</div>
+      <div class="about-desc">A minimalist web-based operating system. Built with vanilla HTML, CSS, and JavaScript. Open-source under the MIT license. Made by a proud Malayali</div>
+      <div style="font-size:.85rem">Made by <a href="https://github.com/najah-pktr/MonOpSy" class="about-link" target="_blank">najah-pktr</a></div>
+      <div style="font-size:.75rem;color:var(--text3);font-family:var(--font-mono)">@najah_pktr · github.com/najah-pktr</div>
       <a href="https://github.com/Muhammednajah/MonOpSy" target="_blank" class="app-btn" style="text-decoration:none"><i class="fab fa-github"></i> View on GitHub</a>
     </div>
   `);
@@ -431,12 +431,12 @@ function buildBrowser(body) {
         <button class="app-btn" onclick="browserNav('back')"><i class="fas fa-arrow-left"></i></button>
         <button class="app-btn" onclick="browserNav('fwd')"><i class="fas fa-arrow-right"></i></button>
         <button class="app-btn" onclick="browserNav('refresh')"><i class="fas fa-sync"></i></button>
-        <input class="app-input" id="browserUrl" style="flex:1" value="https://najahcreates.netlify.app" onkeydown="if(event.key==='Enter')loadBrowser()">
+        <input class="app-input" id="browserUrl" style="flex:1" value="https://google.com" onkeydown="if(event.key==='Enter')loadBrowser()">
         <button class="app-btn" onclick="loadBrowser()"><i class="fas fa-arrow-right"></i></button>
       </div>
       <div class="browser-frame-wrap">
         <div class="browser-loader" id="browserLoader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
-        <iframe class="browser-iframe" id="browserIframe" src="https://najahcreates.netlify.app" onload="document.getElementById('browserLoader').classList.add('hidden')"></iframe>
+        <iframe class="browser-iframe" id="browserIframe" src="https://google.com" onload="document.getElementById('browserLoader').classList.add('hidden')"></iframe>
       </div>
     </div>`;
 }
@@ -527,7 +527,7 @@ const TERM_CMDS = {
   whoami: 'user',
   apps: ()=>Object.keys(APPS).join('  '),
   version: 'MonOpSy v3.0.0',
-  github: 'https://github.com/Muhammednajah/MonOpSy',
+  github: 'https://github.com/najah-pktr/MonOpSy',
   ls: 'Documents/  Downloads/  Pictures/  Music/  Projects/',
   sysinfo: ()=>`OS: MonOpSy Web v3.0\nBrowser: ${navigator.userAgent.split(')')[0].split('(')[1]}\nPlatform: ${navigator.platform}\nLanguage: ${navigator.language}\nOnline: ${navigator.onLine}`,
   neofetch: ()=>`
@@ -537,8 +537,9 @@ const TERM_CMDS = {
     ██║╚██╔╝██║██║   ██║██╔═══╝ 
     ██║ ╚═╝ ██║╚██████╔╝██║     
     ╚═╝     ╚═╝ ╚═════╝ ╚═╝     
-    OS: MonOpSy Web v3.0 · Made by NajahCreates`,
+    OS: MonOpSy Web v3.0 · Made by najah-pktr`,
   easteregg: '🥚 You found it! Check out: https://regiochess.netlify.app — free chess!',
+   fucku:  'Poda myre, pundachi mone, thanthayundoda ninakk thantha!! phaaa. ethada naari nee',
 };
 function termKey(e) {
   if(e.key!=='Enter') return;
@@ -721,7 +722,7 @@ function buildSettings(body) {
       <div class="settings-card">
         <h3>About MonOpSy</h3>
         <div style="font-size:.85rem;color:var(--text2);line-height:1.7">
-          Version 3.0.0 · Made by <a href="https://github.com/Muhammednajah/MonOpSy" target="_blank" style="color:var(--accent)">NajahCreates</a><br>
+          Version 3.0.0 · Made by <a href="https://github.com/najah-pktr/MonOpSy" target="_blank" style="color:var(--accent)">najah-pktr</a><br>
           Open source · MIT License
         </div>
       </div>
@@ -869,8 +870,8 @@ function buildImageViewer(body) {
         <button class="app-btn" onclick="document.getElementById('imgFileIn').click()"><i class="fas fa-folder-open"></i> Open</button>
       </div>
       <div class="imgv-canvas">
-        <img class="imgv-img" id="imgViewImg" src="https://picsum.photos/seed/monopsy/800/600" alt="Image">
-        <div class="imgv-info"><span id="imgName">sample.jpg</span><span id="imgSize"></span></div>
+        <img class="imgv-img" id="imgViewImg" src="assets/wallpaper.jpg" alt="Image">
+        <div class="imgv-info"><span id="imgName">monopsy.js</span><span id="imgSize"></span></div>
       </div>
     </div>`;
 }
@@ -1118,6 +1119,8 @@ const typingPassages=[
   'Coding is the closest thing to superpowers that humans have ever created in this world.',
   'MonOpSy is a minimalist web operating system built with pure HTML CSS and JavaScript.',
   'Design is not just what it looks like and feels like design is how it works well.',
+  'Kerala is a state in Southern India. It is famous for its natural beauty, backwaters and serene culture',
+   'Mohamed Najah is a genious and brilliant boy from Kerala and he do code, graphic design, communication and research at the same time'
 ];
 let typingState={passage:'',input:'',started:false,startTime:null,wpm:0,accuracy:100};
 function buildTypingTest(body) {
