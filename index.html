@@ -1,228 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MonOpSy - Minimalist Web Operating System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <meta name="google-site-verification" content="uEg6bJ4VPQSPFz2FUj3eEiAdUweiDnOihAQ6zD1h6NI" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MonOpSy v3 — Web Operating System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <!-- Boot Screen -->
-    <div class="boot-screen" id="bootScreen">
-        <div class="boot-logo">MonOpSy</div>
-        <div class="boot-text">Minimalist Operating System</div>
-        <div class="boot-progress">
-            <div class="boot-progress-bar" id="bootProgressBar"></div>
-        </div>
-    </div>
 
-    <!-- Lock Screen -->
-    <div class="lock-screen" id="lockScreen">
-        <div class="lock-overlay"></div>
-        <div class="lock-content">
-            <div class="lock-time" id="lockTime">12:00</div>
-            <div class="lock-date" id="lockDate">Monday, January 1, 2023</div>
-            <div class="lock-form">
-                <input type="password" class="lock-input" id="lockPassword" placeholder="Enter password">
-                <button class="lock-button" onclick="unlockScreen()">Unlock</button>
-            </div>
-            <div class="lock-options">
-                <div class="lock-option" onclick="showNotification('Sleep', 'Entering sleep mode')">
-                    <div class="lock-option-icon"><i class="fas fa-moon"></i></div>
-                    <div class="lock-option-text">Sleep</div>
-                </div>
-                <div class="lock-option" onclick="showNotification('Restart', 'System restarting')">
-                    <div class="lock-option-icon"><i class="fas fa-redo"></i></div>
-                    <div class="lock-option-text">Restart</div>
-                </div>
-                <div class="lock-option" onclick="showNotification('Shutdown', 'System shutting down')">
-                    <div class="lock-option-icon"><i class="fas fa-power-off"></i></div>
-                    <div class="lock-option-text">Shutdown</div>
-                </div>
-            </div>
-        </div>
+<!-- BOOT SCREEN -->
+<div class="boot-screen" id="bootScreen">
+  <div class="boot-bg"></div>
+  <div class="boot-content">
+    <div class="boot-logo-mark">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        <rect width="56" height="56" rx="16" fill="var(--accent)"/>
+        <path d="M12 40L22 16L28 32L34 22L44 40" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="28" cy="28" r="3" fill="white"/>
+      </svg>
     </div>
+    <div class="boot-name">MonOpSy</div>
+    <div class="boot-tagline">Minimalist Web Operating System · v3.0</div>
+    <div class="boot-bar-wrap"><div class="boot-bar" id="bootBar"></div></div>
+    <div class="boot-status" id="bootStatus">Initializing kernel...</div>
+  </div>
+</div>
 
-    <!-- Desktop -->
-    <div class="desktop" id="desktop">
-        <div class="desktop-overlay"></div>
-        <!-- Desktop Icons -->
-        <div class="desktop-icons">
-            <div class="desktop-icon" onclick="openApp('calculator')">
-                <div class="icon"><i class="fas fa-calculator"></i></div>
-                <div class="label">Calculator</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('textEditor')">
-                <div class="icon"><i class="fas fa-file-alt"></i></div>
-                <div class="label">Text Editor</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('browser')">
-                <div class="icon"><i class="fas fa-globe"></i></div>
-                <div class="label">Browser</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('fileExplorer')">
-                <div class="icon"><i class="fas fa-folder"></i></div>
-                <div class="label">Files</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('settings')">
-                <div class="icon"><i class="fas fa-cog"></i></div>
-                <div class="label">Settings</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('todo')">
-                <div class="icon"><i class="fas fa-check-square"></i></div>
-                <div class="label">To-Do List</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('snake')">
-                <div class="icon"><i class="fas fa-gamepad"></i></div>
-                <div class="label">Snake Game</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('music')">
-                <div class="icon"><i class="fas fa-music"></i></div>
-                <div class="label">Music Player</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('terminal')">
-                <div class="icon"><i class="fas fa-terminal"></i></div>
-                <div class="label">Terminal</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('calendar')">
-                <div class="icon"><i class="fas fa-calendar"></i></div>
-                <div class="label">Calendar</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('notes')">
-                <div class="icon"><i class="fas fa-sticky-note"></i></div>
-                <div class="label">Notes</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('systemMonitor')">
-                <div class="icon"><i class="fas fa-chart-line"></i></div>
-                <div class="label">System Monitor</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('puzzle')">
-                <div class="icon"><i class="fas fa-puzzle-piece"></i></div>
-                <div class="label">Puzzle Game</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('memory')">
-                <div class="icon"><i class="fas fa-brain"></i></div>
-                <div class="label">Memory Game</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('imageViewer')">
-                <div class="icon"><i class="fas fa-image"></i></div>
-                <div class="label">Image Viewer</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('weather')">
-                <div class="icon"><i class="fas fa-cloud-sun"></i></div>
-                <div class="label">Weather</div>
-            </div>
-            <div class="desktop-icon" onclick="openApp('clock')">
-                <div class="icon"><i class="fas fa-clock"></i></div>
-                <div class="label">Clock</div>
-            </div>
-        </div>
+<!-- LOCK SCREEN -->
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-bg"></div>
+  <div class="lock-widgets">
+    <div class="lock-time-big" id="lockTime">00:00</div>
+    <div class="lock-date-text" id="lockDate">Sunday, January 1</div>
+  </div>
+  <div class="lock-panel">
+    <div class="lock-avatar">
+      <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="16" r="8" fill="var(--accent)"/><path d="M4 36c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="var(--accent)" stroke-width="2.5" fill="none"/></svg>
     </div>
-
-    <!-- Taskbar -->
-    <div class="taskbar">
-        <div class="start-menu" onclick="toggleStartMenu()"><i class="fas fa-th"></i></div>
-        <div class="taskbar-apps" id="taskbarApps"></div>
-        <div class="system-tray">
-            <div class="system-tray-item" onclick="toggleLockScreen()"><i class="fas fa-lock"></i></div>
-            <div class="system-tray-item" onclick="showNotification('Network', 'Connected to WiFi')"><i class="fas fa-wifi"></i></div>
-            <div class="system-tray-item" onclick="showNotification('Battery', '85% remaining')"><i class="fas fa-battery-three-quarters"></i></div>
-            <div class="system-tray-item" onclick="showNotification('Volume', 'Volume at 50%')"><i class="fas fa-volume-up"></i></div>
-            <div class="clock" id="clock">12:00 PM</div>
-        </div>
+    <div class="lock-user">User</div>
+    <div class="lock-pin-display" id="lockPinDisplay">
+      <span class="pin-dot" id="pd0"></span>
+      <span class="pin-dot" id="pd1"></span>
+      <span class="pin-dot" id="pd2"></span>
+      <span class="pin-dot" id="pd3"></span>
     </div>
-
-    <!-- Start Menu Panel -->
-    <div class="start-menu-panel" id="startMenuPanel">
-        <div class="start-menu-header">
-            <div class="start-menu-title">MonOpSy</div>
-            <div class="start-menu-user">
-                <div class="user-avatar">U</div>
-                <div class="user-name">User</div>
-            </div>
-        </div>
-        <input type="text" class="start-menu-search" placeholder="Search apps..." onkeyup="searchApps(this.value)">
-        <div class="start-apps">
-            <div class="start-app" onclick="openApp('calculator'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-calculator"></i></div>
-                <div class="start-app-label">Calculator</div>
-            </div>
-            <div class="start-app" onclick="openApp('textEditor'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-file-alt"></i></div>
-                <div class="start-app-label">Text Editor</div>
-            </div>
-            <div class="start-app" onclick="openApp('browser'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-globe"></i></div>
-                <div class="start-app-label">Browser</div>
-            </div>
-            <div class="start-app" onclick="openApp('fileExplorer'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-folder"></i></div>
-                <div class="start-app-label">Files</div>
-            </div>
-            <div class="start-app" onclick="openApp('settings'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-cog"></i></div>
-                <div class="start-app-label">Settings</div>
-            </div>
-            <div class="start-app" onclick="openApp('todo'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-check-square"></i></div>
-                <div class="start-app-label">To-Do List</div>
-            </div>
-            <div class="start-app" onclick="openApp('snake'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-gamepad"></i></div>
-                <div class="start-app-label">Snake Game</div>
-            </div>
-            <div class="start-app" onclick="openApp('music'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-music"></i></div>
-                <div class="start-app-label">Music Player</div>
-            </div>
-            <div class="start-app" onclick="openApp('terminal'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-terminal"></i></div>
-                <div class="start-app-label">Terminal</div>
-            </div>
-            <div class="start-app" onclick="openApp('calendar'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-calendar"></i></div>
-                <div class="start-app-label">Calendar</div>
-            </div>
-            <div class="start-app" onclick="openApp('notes'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-sticky-note"></i></div>
-                <div class="start-app-label">Notes</div>
-            </div>
-            <div class="start-app" onclick="openApp('systemMonitor'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="start-app-label">System Monitor</div>
-            </div>
-            <div class="start-app" onclick="openApp('puzzle'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-puzzle-piece"></i></div>
-                <div class="start-app-label">Puzzle Game</div>
-            </div>
-            <div class="start-app" onclick="openApp('memory'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-brain"></i></div>
-                <div class="start-app-label">Memory Game</div>
-            </div>
-            <div class="start-app" onclick="openApp('imageViewer'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-image"></i></div>
-                <div class="start-app-label">Image Viewer</div>
-            </div>
-            <div class="start-app" onclick="openApp('weather'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-cloud-sun"></i></div>
-                <div class="start-app-label">Weather</div>
-            </div>
-            <div class="start-app" onclick="openApp('clock'); toggleStartMenu();">
-                <div class="start-app-icon"><i class="fas fa-clock"></i></div>
-                <div class="start-app-label">Clock</div>
-            </div>
-        </div>
+    <div class="lock-numpad">
+      <button class="pin-key" data-val="1">1</button>
+      <button class="pin-key" data-val="2">2</button>
+      <button class="pin-key" data-val="3">3</button>
+      <button class="pin-key" data-val="4">4</button>
+      <button class="pin-key" data-val="5">5</button>
+      <button class="pin-key" data-val="6">6</button>
+      <button class="pin-key" data-val="7">7</button>
+      <button class="pin-key" data-val="8">8</button>
+      <button class="pin-key" data-val="9">9</button>
+      <button class="pin-key pin-clear" data-val="clear"><i class="fas fa-times"></i></button>
+      <button class="pin-key" data-val="0">0</button>
+      <button class="pin-key pin-del" data-val="del"><i class="fas fa-backspace"></i></button>
     </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <div class="notification-title" id="notificationTitle">Welcome</div>
-        <div class="notification-message" id="notificationMessage">MonOpSy is ready</div>
+    <div class="lock-hint">Default PIN: 1234 · Change in Settings</div>
+    <div class="lock-err" id="lockErr"></div>
+    <div class="lock-actions">
+      <button class="lock-act-btn" onclick="showNotification('Sleep','Entering sleep mode...')"><i class="fas fa-moon"></i></button>
+      <button class="lock-act-btn" onclick="location.reload()"><i class="fas fa-redo"></i></button>
     </div>
+  </div>
+</div>
 
-    <script src="script.js">
-    </script>
+<!-- CONTEXT MENU -->
+<div class="ctx-menu" id="ctxMenu">
+  <div class="ctx-item" onclick="ctxAction('refresh')"><i class="fas fa-sync"></i> Refresh Desktop</div>
+  <div class="ctx-item" onclick="ctxAction('lock')"><i class="fas fa-lock"></i> Lock Screen</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" onclick="ctxAction('wallpaper')"><i class="fas fa-image"></i> Change Wallpaper</div>
+  <div class="ctx-item" onclick="ctxAction('settings')"><i class="fas fa-cog"></i> Settings</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" onclick="ctxAction('about')"><i class="fas fa-info-circle"></i> About MonOpSy</div>
+</div>
+
+<!-- DESKTOP -->
+<div class="desktop" id="desktop" oncontextmenu="showCtxMenu(event)">
+  <div class="desktop-icons" id="desktopIcons">
+
+    <!-- Row 1 -->
+    <div class="di" ondblclick="openApp('calculator')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#4a6cf7,#7a9cf7)"><i class="fas fa-calculator"></i></div>
+      <div class="di-label">Calculator</div>
+    </div>
+    <div class="di" ondblclick="openApp('textEditor')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#f76a4a,#f7a44a)"><i class="fas fa-file-alt"></i></div>
+      <div class="di-label">Text Editor</div>
+    </div>
+    <div class="di" ondblclick="openApp('browser')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#4af76a,#4af7c4)"><i class="fas fa-globe"></i></div>
+      <div class="di-label">Browser</div>
+    </div>
+    <div class="di" ondblclick="openApp('fileExplorer')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#f7c44a,#f7f04a)"><i class="fas fa-folder"></i></div>
+      <div class="di-label">Files</div>
+    </div>
+    <div class="di" ondblclick="openApp('terminal')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#1e1e2e,#2e2e4e)"><i class="fas fa-terminal"></i></div>
+      <div class="di-label">Terminal</div>
+    </div>
+    <div class="di" ondblclick="openApp('settings')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#6a6a7a,#9a9ab0)"><i class="fas fa-cog"></i></div>
+      <div class="di-label">Settings</div>
+    </div>
+    <div class="di" ondblclick="openApp('todo')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#c44af7,#f74ac4)"><i class="fas fa-check-square"></i></div>
+      <div class="di-label">To-Do</div>
+    </div>
+    <div class="di" ondblclick="openApp('notes')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#f7e44a,#f7b84a)"><i class="fas fa-sticky-note"></i></div>
+      <div class="di-label">Notes</div>
+    </div>
+    <div class="di" ondblclick="openApp('calendar')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#4af7e4,#4a9cf7)"><i class="fas fa-calendar"></i></div>
+      <div class="di-label">Calendar</div>
+    </div>
+    <div class="di" ondblclick="openApp('music')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#f74a6a,#f74aaa)"><i class="fas fa-music"></i></div>
+      <div class="di-label">Music</div>
+    </div>
+    <div class="di" ondblclick="openApp('imageViewer')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#4af7aa,#4af76a)"><i class="fas fa-image"></i></div>
+      <div class="di-label">Viewer</div>
+    </div>
+    <div class="di" ondblclick="openApp('weather')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#4ac4f7,#4a6cf7)"><i class="fas fa-cloud-sun"></i></div>
+      <div class="di-label">Weather</div>
+    </div>
+    <div class="di" ondblclick="openApp('clock')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#2e2e2e,#4e4e6e)"><i class="fas fa-clock"></i></div>
+      <div class="di-label">Clock</div>
+    </div>
+    <div class="di" ondblclick="openApp('paint')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#f74aaa,#f7aa4a)"><i class="fas fa-paint-brush"></i></div>
+      <div class="di-label">Paint</div>
+    </div>
+    <div class="di" ondblclick="openApp('pomodoro')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#f74a4a,#f7804a)"><i class="fas fa-hourglass-half"></i></div>
+      <div class="di-label">Pomodoro</div>
+    </div>
+    <div class="di" ondblclick="openApp('colorpicker')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#aa4af7,#4af7f7)"><i class="fas fa-eye-dropper"></i></div>
+      <div class="di-label">Colors</div>
+    </div>
+    <div class="di" ondblclick="openApp('markdown')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#4a4af7,#4acaf7)"><i class="fab fa-markdown"></i></div>
+      <div class="di-label">Markdown</div>
+    </div>
+    <div class="di" ondblclick="openApp('typingtest')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#f7c44a,#4af7c4)"><i class="fas fa-keyboard"></i></div>
+      <div class="di-label">Typing</div>
+    </div>
+    <div class="di" ondblclick="openApp('systemMonitor')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#4af74a,#c4f74a)"><i class="fas fa-chart-line"></i></div>
+      <div class="di-label">Monitor</div>
+    </div>
+    <!-- GAMES FOLDER -->
+    <div class="di" ondblclick="openApp('snake')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#2e4e2e,#4e8e4e)"><i class="fas fa-gamepad"></i></div>
+      <div class="di-label">Snake</div>
+    </div>
+    <div class="di" ondblclick="openApp('memory')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#6e2e8e,#ae4ef7)"><i class="fas fa-brain"></i></div>
+      <div class="di-label">Memory</div>
+    </div>
+    <div class="di" ondblclick="openApp('puzzle')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#8e6e2e,#f7c44a)"><i class="fas fa-puzzle-piece"></i></div>
+      <div class="di-label">Puzzle</div>
+    </div>
+    <div class="di" ondblclick="openApp('tetris')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#2e2e8e,#4a6cf7)"><i class="fas fa-th-large"></i></div>
+      <div class="di-label">Tetris</div>
+    </div>
+    <div class="di" ondblclick="openApp('tictactoe')">
+      <div class="di-icon" style="background:linear-gradient(135deg,#8e2e2e,#f74a4a)"><i class="fas fa-hashtag"></i></div>
+      <div class="di-label">TicTacToe</div>
+    </div>
+  </div>
+</div>
+
+<!-- TASKBAR -->
+<div class="taskbar" id="taskbar">
+  <button class="tb-start" id="tbStart" onclick="toggleStartMenu()">
+    <svg width="22" height="22" viewBox="0 0 56 56" fill="none">
+      <rect width="56" height="56" rx="12" fill="white" fill-opacity="0.15"/>
+      <path d="M12 40L22 16L28 32L34 22L44 40" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="28" cy="28" r="3" fill="white"/>
+    </svg>
+  </button>
+  <div class="tb-apps" id="tbApps"></div>
+  <div class="tb-tray">
+    <button class="tb-tray-btn" title="Lock" onclick="lockScreen()"><i class="fas fa-lock"></i></button>
+    <button class="tb-tray-btn" title="Wi-Fi"><i class="fas fa-wifi"></i></button>
+    <button class="tb-tray-btn" title="Volume" onclick="toggleVolume()"><i class="fas fa-volume-up" id="volIcon"></i></button>
+    <div class="tb-clock" id="tbClock">00:00</div>
+  </div>
+</div>
+
+<!-- START MENU -->
+<div class="start-menu" id="startMenu">
+  <div class="sm-header">
+    <div class="sm-brand">
+      <svg width="28" height="28" viewBox="0 0 56 56" fill="none">
+        <rect width="56" height="56" rx="14" fill="var(--accent)"/>
+        <path d="M12 40L22 16L28 32L34 22L44 40" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="28" cy="28" r="3" fill="white"/>
+      </svg>
+      <span>MonOpSy</span>
+    </div>
+    <div class="sm-user">
+      <div class="sm-avatar">U</div>
+      <span>User</span>
+    </div>
+  </div>
+  <input class="sm-search" type="text" placeholder="Search apps..." oninput="filterStartApps(this.value)" />
+  <div class="sm-section-title">Apps</div>
+  <div class="sm-grid" id="smGrid">
+    <!-- populated by JS -->
+  </div>
+  <div class="sm-footer">
+    <button class="sm-foot-btn" onclick="lockScreen();toggleStartMenu()"><i class="fas fa-lock"></i> Lock</button>
+    <button class="sm-foot-btn" onclick="openApp('settings');toggleStartMenu()"><i class="fas fa-cog"></i> Settings</button>
+    <button class="sm-foot-btn" onclick="location.reload()"><i class="fas fa-power-off"></i> Restart</button>
+  </div>
+</div>
+
+<!-- NOTIFICATION STACK -->
+<div class="notif-stack" id="notifStack"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
